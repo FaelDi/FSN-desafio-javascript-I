@@ -48,10 +48,6 @@ const alunosDaEscola=
 ];
 // implementação
 
-function checarAlune(nome,array)
-{
-
-}
 
 function adicionarAluno(nome){
         let novoAluno =     
@@ -66,8 +62,10 @@ function adicionarAluno(nome){
         if(teste == -1){
             alunosDaEscola.push(novoAluno);
             console.log(`Aluno: ${nome} adicionado`);
+            return 1;
         }else{
             console.log('O aluno referido já esxiste');
+            return 0;
         }
     }
    
@@ -89,6 +87,7 @@ function adicionarAluno(nome){
             }
             console.log(`faltas: ${elm.faltas}`);
         });
+        return alunosDaEscola;
     }
 
     function buscarAluno(nome){
@@ -109,9 +108,11 @@ function adicionarAluno(nome){
         console.log(teste);
         if(teste == -1 ){
             console.log("O aluno não existe!");
+            return 0;
         }else{
             alunosDaEscola[teste].cursos.push(curso);
             console.log(`Aluno: ${aluno.nome} matriculado no curso: ${curso}`);
+            return 1;
         }
    }
     function aplicarFalta(aluno){
@@ -122,9 +123,11 @@ function adicionarAluno(nome){
 
         if(teste == -1 ){
             console.log("O aluno não existe!");
+            return 0;
         }else{
             alunosDaEscola[teste].faltas++;
             console.log(`Aluno: ${aluno.nome} recebeu uma falta!`);
+            return 1;
         }
         
     }
@@ -137,9 +140,11 @@ function adicionarAluno(nome){
         let teste = alunosDaEscola.findIndex( element => element.nome == aluno.nome );
         if(teste == -1 ){
             console.log("O aluno não existe!");
+            return 0;
         }else{
             alunosDaEscola[teste].notas.push(nota);
             console.log(`Aluno: ${aluno.nome} recebeu novas nota: ${nota}`);
+            return 1;
         }
    }
    
@@ -151,14 +156,17 @@ function adicionarAluno(nome){
         let teste = alunosDaEscola.findIndex( element => element.nome == aluno.nome );
         if(teste == -1 ){
             console.log("O aluno não existe!");
+            return 0;
         }else{
             let aluno = alunosDaEscola[teste];
             if(aluno.faltas <= 3 ){
                 const reducer = (accumulator, currentValue) => accumulator + currentValue;
                 if(aluno.notas.reduce(reducer)/3 >= 7){
                     console.log("Alunos aprovado");
+                    return 1;
                 }else{
                     console.log("Aluno não atingiu média 7");
+                    
                 }
             }else{
                 console.log(`O aluno passou do limite de faltas`);
@@ -169,6 +177,8 @@ function adicionarAluno(nome){
 
      }
 
+
+module.exports = {alunosDaEscola, listarAlunos, adicionarAluno, buscarAluno, aprovarAluno,aplicarFalta,aplicarNota,matricularAluno}
 // TESTES 
 
 //console.log(buscarAluno("Henrique"));
@@ -180,6 +190,7 @@ let henrique = {
     faltas:5
 } 
 
+
 //aplicarFalta(henrique);
 
 //console.log(buscarAluno("Henrique"));
@@ -189,7 +200,7 @@ let henrique = {
 //adicionarAluno("Rafael");
 //adicionarAluno("Henrique");
 
-listarAlunos();
+/*listarAlunos();
 
 
 console.log(buscarAluno("Henrique"));
@@ -197,4 +208,4 @@ aplicarNota(henrique,10);
 aplicarNota(henrique,7);
 aplicarNota(henrique,6);
 aprovarAluno(henrique);
-console.log(buscarAluno("Henrique"));
+console.log(buscarAluno("Henrique"));*/
